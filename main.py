@@ -24,24 +24,26 @@ if 'chat_history' not in st.session_state:
 def show_chat_history():
     if len(st.session_state['chat_history'])>0:
         for i in range(len(st.session_state['chat_history'])//2):
-            message(st.session_state['chat_history'][i*1], is_user=True, key=str(i*1) + '_user')
+            message(st.session_state['chat_history'][i*2], is_user=True, key=str(i*2) + '_user')
             message(st.session_state['chat_history'][i*2+1], key=str(i*2+1))
 
 # st.session_state['chat_history'].append('message1')
 # st.session_state['chat_history'].append('message2')
 
 
-
-input_text = st.text_input("You: ",key="input")
-if input_text:
-    st.session_state['chat_history'].append(input_text)
-    st.session_state['chat_history'].append(input_text * 2)
-    input_text = None
-
 show_chat_history()
 
-st.subheader('History')
-st.write(st.session_state['chat_history'])
+with st.form("user_input"):
+    user_input = st.text_input(label='What is your question?')
+    user_input_submitted = st.form_submit_button("Submit")
+
+if user_input_submitted:
+    st.session_state['chat_history'].append(user_input)
+    st.session_state['chat_history'].append(user_input * 2)
+
+
+# st.subheader('History')
+# st.write(st.session_state['chat_history'])
 
 # #Creating the chatbot interface
 # st.title("chatBot : Streamlit + openAI")
