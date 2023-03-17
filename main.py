@@ -36,7 +36,7 @@ input_text = st.text_input("You: ",key="input")
 if input_text:
     st.session_state['chat_history'].append(input_text)
     st.session_state['chat_history'].append(input_text * 2)
-    
+    input_text = None
 
 show_chat_history()
 
