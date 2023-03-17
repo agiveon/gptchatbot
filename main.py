@@ -38,9 +38,7 @@ with st.form("user_input"):
 
     user_input = st.text_input(
         "Enter some text 👇",
-        label_visibility=True,
-        disabled=True,
-        placeholder='enter text here',
+        placeholder='enter text here'
     )
 
     user_input_submitted = st.form_submit_button("Submit")
