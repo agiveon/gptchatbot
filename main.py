@@ -27,11 +27,18 @@ def show_chat_history():
             message(st.session_state['chat_history'][i*1], is_user=True, key=str(i*1) + '_user')
             message(st.session_state['chat_history'][i*2+1], key=str(i*2+1))
 
-st.session_state['chat_history'].append('message1')
-st.session_state['chat_history'].append('message2')
+# st.session_state['chat_history'].append('message1')
+# st.session_state['chat_history'].append('message2')
+
+
+
+input_text = st.text_input("You: ",key="input")
+if input_text:
+    st.session_state['chat_history'].append(input_text)
+    st.session_state['chat_history'].append(input_text * 2)
+    
 
 show_chat_history()
-
 
 # #Creating the chatbot interface
 # st.title("chatBot : Streamlit + openAI")
