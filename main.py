@@ -34,7 +34,15 @@ def show_chat_history():
 show_chat_history()
 
 with st.form("user_input"):
-    user_input = st.text_input(label='What is your question?')
+    # user_input = st.text_input(label='What is your question?')
+
+    user_input = st.text_input(
+        "Enter some text 👇",
+        label_visibility=st.session_state.visibility,
+        disabled=st.session_state.disabled,
+        placeholder='enter text here',
+    )
+
     user_input_submitted = st.form_submit_button("Submit")
 
 if user_input_submitted:
