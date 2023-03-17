@@ -38,7 +38,7 @@ with st.form("user_input"):
 
     user_input = st.text_input(
         "Enter some text 👇",
-        label_visibility=st.session_state.visibility,
+        label_visibility=True,
         disabled=st.session_state.disabled,
         placeholder='enter text here',
     )
