@@ -29,7 +29,7 @@ if 'chat_history' not in st.session_state:
 st.session_state['chat_history'].append('message1')
 st.session_state['chat_history'].append('message2')
 
-
+show_chat_history()
 
 
 # #Creating the chatbot interface
