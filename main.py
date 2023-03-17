@@ -18,14 +18,14 @@ def generate_response(prompt):
     message = completions.choices[0].text
     return message 
 
+if 'chat_history' not in st.session_state:
+    st.session_state['chat_history'] = []
+
 def show_chat_history():
     if len(st.session_state['chat_history'])>0:
         for i in range(len(st.session_state['chat_history'])/2):
             message(st.session_state['chat_history'][i*1], is_user=True, key=str(i*1) + '_user')
             message(st.session_state['chat_history'][i*2+1], key=str(i*2+1))
-
-if 'chat_history' not in st.session_state:
-    st.session_state['chat_history'] = []
 
 st.session_state['chat_history'].append('message1')
 st.session_state['chat_history'].append('message2')
