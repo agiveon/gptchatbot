@@ -37,7 +37,7 @@ if st.session_state['generated']:
 
 # We will get the user's input by calling the get_text function
 def get_text():
-    input_text = st.text_input("You: ","Hello, how are you?", key="input")
+    input_text = st.text_input("You: ", key="input")
     return input_text
 
 # Place the text input below the chat history display
