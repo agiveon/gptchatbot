@@ -48,8 +48,8 @@ if user_input_submitted:
     st.session_state['chat_history'].append(user_input * 2)
 
 
-# st.subheader('History')
-# st.write(st.session_state['chat_history'])
+st.subheader('History')
+st.write(st.session_state['chat_history'])
 
 # #Creating the chatbot interface
 # st.title("chatBot : Streamlit + openAI")
