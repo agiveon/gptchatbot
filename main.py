@@ -40,6 +40,9 @@ if input_text:
 
 show_chat_history()
 
+st.subheader('History')
+st.write(st.session_state['chat_history'])
+
 # #Creating the chatbot interface
 # st.title("chatBot : Streamlit + openAI")
 
