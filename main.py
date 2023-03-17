@@ -18,33 +18,47 @@ def generate_response(prompt):
     message = completions.choices[0].text
     return message 
 
-#Creating the chatbot interface
-st.title("chatBot : Streamlit + openAI")
+def show_chat_history():
+    for i in range(len(st.session_state['chat_history'])/2):
+        message(st.session_state['chat_history'][i*1], is_user=True, key=str(i*1) + '_user')
+        message(st.session_state['chat_history'][i*2+1], key=str(i*2+1))
 
-# Storing the chat
-if 'generated' not in st.session_state:
-    st.session_state['generated'] = []
+if 'chat_history' not in st.session_state:
+    st.session_state['chat_history'] = []
 
-if 'past' not in st.session_state:
-    st.session_state['past'] = []
+st.session_state['chat_history'].append('message1')
+st.session_state['chat_history'].append('message2')
 
-# Display the chat history in reverse order
-if st.session_state['generated']:
+
+
+
+# #Creating the chatbot interface
+# st.title("chatBot : Streamlit + openAI")
+
+# # Storing the chat
+# if 'generated' not in st.session_state:
+#     st.session_state['generated'] = []
+
+# if 'past' not in st.session_state:
+#     st.session_state['past'] = []
+
+# # Display the chat history in reverse order
+# if st.session_state['generated']:
     
-    for i in range(len(st.session_state['generated'])-1):
-        message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
-        message(st.session_state["generated"][i], key=str(i))
+#     for i in range(len(st.session_state['generated'])-1):
+#         message(st.session_state['past'][i], is_user=True, key=str(i) + '_user')
+#         message(st.session_state["generated"][i], key=str(i))
 
-# We will get the user's input by calling the get_text function
-def get_text():
-    input_text = st.text_input("You: ","Hello, how are you?", key="input")
-    return input_text
+# # We will get the user's input by calling the get_text function
+# def get_text():
+#     input_text = st.text_input("You: ","Hello, how are you?", key="input")
+#     return input_text
 
-# Place the text input below the chat history display
-user_input = get_text()
+# # Place the text input below the chat history display
+# user_input = get_text()
 
-if user_input:
-    output = generate_response(user_input)
-    # store the output 
-    st.session_state.past.append(user_input)
-    st.session_state.generated.append(output)
+# if user_input:
+#     output = generate_response(user_input)
+#     # store the output 
+#     st.session_state.past.append(user_input)
+#     st.session_state.generated.append(output)
