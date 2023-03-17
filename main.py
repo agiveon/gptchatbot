@@ -5,7 +5,7 @@ import streamlit as st
 
 def show_messages(text):
     messages_str = [
-        f"{_['role']}: {_['content']}" for _ in st.session_state["messages"][1:]
+        f"{a['role']}: {a['content']}" for a in st.session_state["messages"][1:]
     ]
     text.text_area("Messages", value=str("\n".join(messages_str)), height=400)
 
