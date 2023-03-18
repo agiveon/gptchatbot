@@ -32,7 +32,7 @@ if st.button("Submit", on_click=clear_text):
         )
         message_response = response["choices"][0]["message"]["content"]
         st.session_state["messages"] += [
-            {"role": "system", "content": message_response}
+            {"role": "assistant", "content": message_response}
         ]
         show_messages(text)
 
@@ -40,8 +40,16 @@ if st.button("Clear"):
     st.session_state["messages"] = BASE_PROMPT
     show_messages(text)
 
-st.subheader('History')
-st.write(st.session_state["messages"])
+input = st.text_input("text", key="text")
+
+def clear_text():
+    st.session_state["text"] = ""
+    
+st.button("clear text input", on_click=clear_text)
+st.write(input)
+
+# st.subheader('History')
+# st.write(st.session_state["messages"])
 
 
 
