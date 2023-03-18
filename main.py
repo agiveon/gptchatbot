@@ -19,7 +19,7 @@ st.header("STREAMLIT GPT-3 CHATBOT")
 text = st.empty()
 show_messages(text)
 
-prompt = st.text_input("Prompt", key="text")
+prompt = st.text_input("Prompt")
     
 if st.button("Submit"):
     with st.spinner("Generating response..."):
