@@ -5,7 +5,7 @@ import streamlit as st
 
 def show_messages(text):
     # messages_str = [f"{a['role']}: {a['content']}" for a in st.session_state["messages"][1:]]
-    messages_str = [f"USER: {a['content']} \n" if a['role']=="user" else f"JANE: {a['content']}" for a in st.session_state["messages"][1:]]
+    messages_str = [f"USER: {a['content']} \n" if a['role']=="user" else f"JANE: {a['content']} \n" for a in st.session_state["messages"][1:]]
     text.text_area("Messages", value=str("\n".join(messages_str)), height=200)
 
 openai.api_key = st.secrets["openai_key"]
@@ -21,7 +21,10 @@ show_messages(text)
 
 prompt = st.text_input("Prompt", value="Enter your message here...")
 
-if st.button("Send"):
+def clear_text():
+    st.session_state["text"] = ""
+    
+if st.button("Submit", on_click=clear_text):
     with st.spinner("Generating response..."):
         st.session_state["messages"] += [{"role": "user", "content": prompt}]
         response = openai.ChatCompletion.create(
