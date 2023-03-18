@@ -40,7 +40,8 @@ if st.button("Clear"):
     st.session_state["messages"] = BASE_PROMPT
     show_messages(text)
 
-
+st.subheader('History')
+st.write(st.session_state["messages"])
 
 
 
