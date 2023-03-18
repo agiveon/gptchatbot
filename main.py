@@ -38,7 +38,7 @@ if submit:
         ]
         show_messages(text)
 
-if st.button("Clear"):
+if st.button("Reset Conversation"):
     st.session_state["messages"] = BASE_PROMPT
     show_messages(text)
 
