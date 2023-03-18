@@ -1,6 +1,36 @@
 import openai
 import toml
 import streamlit as st
+from horoscope import get_horoscope_content
+
+def get_zodiac_sign(dob):
+    month = dob.month
+    day = dob.day
+
+    if month == 1:
+        return 'Capricorn' if day <= 19 else 'Aquarius'
+    elif month == 2:
+        return 'Aquarius' if day <= 18 else 'Pisces'
+    elif month == 3:
+        return 'Pisces' if day <= 20 else 'Aries'
+    elif month == 4:
+        return 'Aries' if day <= 19 else 'Taurus'
+    elif month == 5:
+        return 'Taurus' if day <= 20 else 'Gemini'
+    elif month == 6:
+        return 'Gemini' if day <= 20 else 'Cancer'
+    elif month == 7:
+        return 'Cancer' if day <= 22 else 'Leo'
+    elif month == 8:
+        return 'Leo' if day <= 22 else 'Virgo'
+    elif month == 9:
+        return 'Virgo' if day <= 22 else 'Libra'
+    elif month == 10:
+        return 'Libra' if day <= 22 else 'Scorpio'
+    elif month == 11:
+        return 'Scorpio' if day <= 21 else 'Sagittarius'
+    elif month == 12:
+        return 'Sagittarius' if day <= 21 else 'Capricorn'
 
 
 def show_messages(text):
@@ -17,6 +47,10 @@ with st.form("name_dob", clear_on_submit=True):
         user_dob = st.date_input('What is your dob?')
         name_dob_submit = st.form_submit_button(label="Submit")
 
+if name_dob_submit:
+    zodiac_sign = get_zodiac_sign(user_dob)
+    horoscope = get_horoscope_content(day='today', week = 'current', month = 'current', sign=zodiac_sign)
+    st.write('✅ Got the horoscope and ready for questions.')
 
 
 BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my questions about my horoscope"}]
