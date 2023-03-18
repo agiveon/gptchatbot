@@ -49,8 +49,8 @@ with st.form("name_dob", clear_on_submit=True):
 
 if name_dob_submit:
     zodiac_sign = get_zodiac_sign(user_dob)
-    horoscope = get_horoscope_content(day='today', week = 'current', month = 'current', sign=zodiac_sign)
-    st.write('✅ Got the horoscope and ready for questions.')
+    st.session_state["horoscope"] = get_horoscope_content(day='today', week = 'current', month = 'current', sign=zodiac_sign)
+    st.write(f'✅ Got the horoscope - you can proceed to chat.')
 
 
 BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my questions about my horoscope"}]
