@@ -5,7 +5,7 @@ import streamlit as st
 
 def show_messages(text):
     # messages_str = [f"{a['role']}: {a['content']}" for a in st.session_state["messages"][1:]]
-    messages_str = [f"USER: {a['content']} \n" if a['role']=="user" else f"JANE: {a['content']} \n" for a in st.session_state["messages"][1:]]
+    messages_str = [f"USER: {a['content']} \n" if a['role']=="user" else f"JANE: {a['content']}" for a in st.session_state["messages"][1:]]
     text.text_area("Messages", value=str("\n".join(messages_str)), height=200)
 
 openai.api_key = st.secrets["openai_key"]
@@ -14,30 +14,14 @@ BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my q
 if "messages" not in st.session_state:
     st.session_state["messages"] = BASE_PROMPT
 
-# if "user_input" not in st.session_state:
-#     st.session_state["user_input"] = ""
-
 st.header("STREAMLIT GPT-3 CHATBOT")
 
 text = st.empty()
 show_messages(text)
 
-input = st.text_input("text", key="text")
+prompt = st.text_input("Prompt", value="Enter your message here...")
 
-def clear_text():
-    st.session_state["text"] = ""
-    
-st.button("clear text input", on_click=clear_text)
-st.write(input)
-
-
-
-with st.form("user_input"):
-    prompt = st.text_input("Prompt",value=" ")
-
-    user_input_submitted = st.form_submit_button("Submit")
-
-if user_input_submitted:
+if st.button("Send"):
     with st.spinner("Generating response..."):
         st.session_state["messages"] += [{"role": "user", "content": prompt}]
         response = openai.ChatCompletion.create(
