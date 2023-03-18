@@ -22,17 +22,19 @@ show_messages(text)
 with st.form("user_input"):
     prompt = st.text_input("Prompt")
 
-    if st.button("Send"):
-        with st.spinner("Generating response..."):
-            st.session_state["messages"] += [{"role": "user", "content": prompt}]
-            response = openai.ChatCompletion.create(
-                model="gpt-3.5-turbo", messages=st.session_state["messages"]
-            )
-            message_response = response["choices"][0]["message"]["content"]
-            st.session_state["messages"] += [
-                {"role": "system", "content": message_response}
-            ]
-            show_messages(text)
+    user_input_submitted = st.form_submit_button("Submit")
+
+if user_input_submitted:
+    with st.spinner("Generating response..."):
+        st.session_state["messages"] += [{"role": "user", "content": prompt}]
+        response = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo", messages=st.session_state["messages"]
+        )
+        message_response = response["choices"][0]["message"]["content"]
+        st.session_state["messages"] += [
+            {"role": "system", "content": message_response}
+        ]
+        show_messages(text)
 
 if st.button("Clear"):
     st.session_state["messages"] = BASE_PROMPT
