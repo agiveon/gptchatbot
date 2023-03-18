@@ -9,6 +9,14 @@ def show_messages(text):
     text.text_area("Messages", value=str("\n".join(messages_str)), height=200)
 
 openai.api_key = st.secrets["openai_key"]
+
+with st.form("name_dob", clear_on_submit=True):
+        user_name = st.text_input("What is your name?")
+        user_dob = st.date_input('What is your dob?')
+        name_dob_submit = st.form_submit_button(label="Submit")
+
+
+
 BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my questions about my horoscope"}]
 
 if "messages" not in st.session_state:
