@@ -5,7 +5,7 @@ import streamlit as st
 
 def show_messages(text):
     # messages_str = [f"{a['role']}: {a['content']}" for a in st.session_state["messages"][1:]]
-    messages_str = [f"USER: {a['content']} \n" if a['role']=="user" else f"JANE: {a['content']} \n" for a in st.session_state["messages"][1:]]
+    messages_str = [f"🧑: {a['content']} \n" if a['role']=="user" else f"🔮: {a['content']} \n" for a in st.session_state["messages"][1:]]
     text.text_area("Messages", value=str("\n".join(messages_str)), height=200)
 
 openai.api_key = st.secrets["openai_key"]
@@ -14,7 +14,7 @@ BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my q
 if "messages" not in st.session_state:
     st.session_state["messages"] = BASE_PROMPT
 
-st.header("STREAMLIT GPT-3 CHATBOT")
+st.header("GPT-3 CHATBOT")
 
 text = st.empty()
 show_messages(text)
@@ -23,36 +23,25 @@ with st.form("myform", clear_on_submit=True):
         prompt = st.text_input("Prompt")
         submit = st.form_submit_button(label="Submit")
 
-# prompt = st.text_input("Prompt")
-    
-# if st.button("Submit"):
+
 if submit:
     with st.spinner("Generating response..."):
         st.session_state["messages"] += [{"role": "user", "content": prompt}]
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", messages=st.session_state["messages"]
+        
+        response = openai.ChatCompletion.create
+        (
+            model="gpt-3.5-turbo", 
+            messages=st.session_state["messages"]
         )
+        
         message_response = response["choices"][0]["message"]["content"]
-        st.session_state["messages"] += [
-            {"role": "assistant", "content": message_response}
-        ]
+        st.session_state["messages"] += [{"role": "assistant", "content": message_response}]
         show_messages(text)
 
 if st.button("Reset Conversation"):
     st.session_state["messages"] = BASE_PROMPT
     show_messages(text)
 
-# input = st.text_input("text", key="text")
-
-# def clear_text():
-#     st.session_state["text"] = ""
-    
-# st.button("clear text input", on_click=clear_text)
-# st.write(input)
-
-
-# st.subheader('History')
-# st.write(st.session_state["messages"])
 
 
 
