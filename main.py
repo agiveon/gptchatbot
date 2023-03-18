@@ -22,6 +22,16 @@ st.header("STREAMLIT GPT-3 CHATBOT")
 text = st.empty()
 show_messages(text)
 
+input = st.text_input("text", key="text")
+
+def clear_text():
+    st.session_state["text"] = ""
+    
+st.button("clear text input", on_click=clear_text)
+st.write(input)
+
+
+
 with st.form("user_input"):
     prompt = st.text_input("Prompt",value=" ")
 
