@@ -14,13 +14,17 @@ BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my q
 if "messages" not in st.session_state:
     st.session_state["messages"] = BASE_PROMPT
 
+if "user_input" not in st.session_state:
+    st.session_state["user_input"] = ""
+
+
 st.header("STREAMLIT GPT-3 CHATBOT")
 
 text = st.empty()
 show_messages(text)
 
 with st.form("user_input"):
-    prompt = st.text_input("Prompt")
+    prompt = st.text_input("Prompt",value="")
 
     user_input_submitted = st.form_submit_button("Submit")
 
