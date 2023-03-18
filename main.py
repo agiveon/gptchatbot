@@ -24,7 +24,7 @@ text = st.empty()
 show_messages(text)
 
 with st.form("user_input"):
-    prompt = st.text_input("Prompt",value="")
+    prompt = st.text_input("Prompt",value="hello")
 
     user_input_submitted = st.form_submit_button("Submit")
 
