@@ -28,8 +28,7 @@ if submit:
     with st.spinner("Generating response..."):
         st.session_state["messages"] += [{"role": "user", "content": prompt}]
         
-        response = openai.ChatCompletion.create
-        (
+        response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", 
             messages=st.session_state["messages"]
         )
