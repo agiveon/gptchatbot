@@ -20,11 +20,8 @@ text = st.empty()
 show_messages(text)
 
 prompt = st.text_input("Prompt", key="text")
-
-def clear_text():
-    st.session_state["text"] = ""
     
-if st.button("Submit", on_click=clear_text):
+if st.button("Submit"):
     with st.spinner("Generating response..."):
         st.session_state["messages"] += [{"role": "user", "content": prompt}]
         response = openai.ChatCompletion.create(
