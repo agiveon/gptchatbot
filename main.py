@@ -10,6 +10,8 @@ def show_messages(text):
 
 openai.api_key = st.secrets["openai_key"]
 
+st.header("STEP 1: Name & DOB")
+
 with st.form("name_dob", clear_on_submit=True):
         user_name = st.text_input("What is your name?")
         user_dob = st.date_input('What is your dob?')
@@ -22,7 +24,7 @@ BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my q
 if "messages" not in st.session_state:
     st.session_state["messages"] = BASE_PROMPT
 
-st.header("GPT-3 CHATBOT")
+st.header("STEP 2: CHATBOT")
 
 text = st.empty()
 show_messages(text)
