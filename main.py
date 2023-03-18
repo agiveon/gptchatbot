@@ -19,9 +19,14 @@ st.header("STREAMLIT GPT-3 CHATBOT")
 text = st.empty()
 show_messages(text)
 
-prompt = st.text_input("Prompt")
+with st.form("myform", clear_on_submit=True):
+        prompt = st.text_input("Prompt")
+        submit = st.form_submit_button(label="Submit")
+
+# prompt = st.text_input("Prompt")
     
-if st.button("Submit"):
+# if st.button("Submit"):
+if submit:
     with st.spinner("Generating response..."):
         st.session_state["messages"] += [{"role": "user", "content": prompt}]
         response = openai.ChatCompletion.create(
@@ -37,13 +42,13 @@ if st.button("Clear"):
     st.session_state["messages"] = BASE_PROMPT
     show_messages(text)
 
-input = st.text_input("text", key="text")
+# input = st.text_input("text", key="text")
 
-def clear_text():
-    st.session_state["text"] = ""
+# def clear_text():
+#     st.session_state["text"] = ""
     
-st.button("clear text input", on_click=clear_text)
-st.write(input)
+# st.button("clear text input", on_click=clear_text)
+# st.write(input)
 
 
 # st.subheader('History')
