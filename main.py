@@ -4,8 +4,8 @@ import streamlit as st
 
 
 def show_messages(text):
-    messages_str = [f"{a['role']}: {a['content']}" for a in st.session_state["messages"][1:]]
-    # messages_str = [f"USER: {a['content']}" for a in st.session_state["messages"][1:] if a['role'] == 'user' else "SYSTEM: {a['content']}"]
+    # messages_str = [f"{a['role']}: {a['content']}" for a in st.session_state["messages"][1:]]
+    messages_str = ["USER" + sentence[4:] if sentence.startswith("user") else "Jane" + sentence[6:] if sentence.startswith("system") else sentence for sentence in st.session_state["messages"][1:]]
     text.text_area("Messages", value=str("\n".join(messages_str)), height=200)
 
 openai.api_key = st.secrets["openai_key"]
