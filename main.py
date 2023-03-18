@@ -9,7 +9,7 @@ def show_messages(text):
     text.text_area("Messages", value=str("\n".join(messages_str)), height=200)
 
 openai.api_key = st.secrets["openai_key"]
-BASE_PROMPT = [{"role": "system", "content": "You are a helpful assistant."}]
+BASE_PROMPT = [{"role": "system", "content": "You are an astrologer, ask me for my name, date of birth and birth location. Calculate my birth chart and let me ask questions about my horoscope"}]
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = BASE_PROMPT
