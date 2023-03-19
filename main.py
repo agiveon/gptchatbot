@@ -64,8 +64,6 @@ BASE_PROMPT.append({"role": "system", "content": f"My name is {user_name}. You a
 if "messages" not in st.session_state:
     st.session_state["messages"] = BASE_PROMPT
 
-
-
 st.header("STEP 2: CHATBOT")
 
 text = st.empty()
@@ -93,6 +91,8 @@ if st.button("Reset Conversation"):
     st.session_state["messages"] = BASE_PROMPT
     show_messages(text)
 
+st.subheader('History')
+st.write(st.session_state["messages"][1:])
 
 
 
