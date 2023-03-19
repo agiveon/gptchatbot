@@ -92,7 +92,7 @@ if st.button("Reset Conversation"):
     show_messages(text)
 
 st.subheader('History')
-st.write(st.session_state["messages"][1:])
+st.write(st.session_state["messages"])
 
 
 
