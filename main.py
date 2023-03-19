@@ -89,14 +89,14 @@ if submit:
         st.session_state["messages"] += [{"role": "assistant", "content": message_response}]
         show_messages(text)
 
-if st.button("Reset Conversation"):
-    st.session_state["messages"] = ''
-    show_messages(text)
+# if st.button("Reset Conversation"):
+#     st.session_state["messages"] = ''
+#     show_messages(text)
 
 
-if name_dob_submit:
-    st.subheader('History')
-    st.write(st.session_state["messages"])
+# if name_dob_submit:
+#     st.subheader('History')
+#     st.write(st.session_state["messages"])
 
 
 
