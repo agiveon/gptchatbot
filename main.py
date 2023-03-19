@@ -90,7 +90,7 @@ if submit:
         show_messages(text)
 
 if st.button("Reset Conversation"):
-    st.session_state["messages"] = BASE_PROMPT
+    st.session_state["messages"] = ''
     show_messages(text)
 
 if name_dob_submit:
