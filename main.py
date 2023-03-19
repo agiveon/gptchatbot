@@ -42,6 +42,10 @@ openai.api_key = st.secrets["openai_key"]
 
 st.header("STEP 1: Name & DOB")
 
+if "horoscope" not in st.session_state:
+    st.session_state["horoscope"] = ''
+
+
 with st.form("name_dob", clear_on_submit=True):
         user_name = st.text_input("What is your name?")
         user_dob = st.date_input('What is your dob?')
@@ -59,6 +63,8 @@ BASE_PROMPT.append({"role": "system", "content": f"My name is {user_name}. You a
 
 if "messages" not in st.session_state:
     st.session_state["messages"] = BASE_PROMPT
+
+
 
 st.header("STEP 2: CHATBOT")
 
