@@ -35,7 +35,10 @@ def get_zodiac_sign(dob):
 
 def show_messages(text):
     # messages_str = [f"{a['role']}: {a['content']}" for a in st.session_state["messages"][1:]]
-    messages_str = [f"🧑: {a['content']} \n" if a['role']=="user" else f"🔮: {a['content']} \n" for a in st.session_state["messages"]]
+    if len(st.session_state["messages"])>3:
+        messages_str = [f"🧑: {a['content']} \n" if a['role']=="user" else f"🔮: {a['content']} \n" for a in st.session_state["messages"][3:]]
+    else:
+        messages_str = ''
     text.text_area("Messages", value=str("\n".join(messages_str)), height=200)
 
 openai.api_key = st.secrets["openai_key"]
