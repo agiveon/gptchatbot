@@ -45,6 +45,10 @@ st.header("STEP 1: Name & DOB")
 if "horoscope" not in st.session_state:
     st.session_state["horoscope"] = ''
 
+if "messages" not in st.session_state:
+    st.session_state["messages"] = ''
+
+
 with st.form("name_dob", clear_on_submit=True):
         user_name = st.text_input("What is your name?")
         user_dob = st.date_input('What is your dob?')
@@ -56,11 +60,9 @@ if name_dob_submit:
     st.write(f'✅ Hi {user_name}, got your horoscope - you can proceed to chat.')
     st.write(st.session_state["horoscope"])
     BASE_PROMPT = [{"role": "system", "content": f"My name is {user_name}. You are my astrologer named Jane. Answer questions regarding my horoscope: {st.session_state['horoscope']}"}]
+    st.session_state["messages"] = BASE_PROMPT
 
 # BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my questions about my horoscope"}]
-
-if "messages" not in st.session_state:
-    st.session_state["messages"] = BASE_PROMPT
 
 st.header("STEP 2: CHATBOT")
 
@@ -74,7 +76,7 @@ with st.form("myform", clear_on_submit=True):
 
 if submit:
     with st.spinner("Generating response..."):
-        st.session_state["messages"] += [{"role": "user", "content": prompt}]
+        st.session_state["messages"].append([{"role": "user", "content": prompt}])
         
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", 
@@ -82,7 +84,7 @@ if submit:
         )
         
         message_response = response["choices"][0]["message"]["content"]
-        st.session_state["messages"] += [{"role": "assistant", "content": message_response}]
+        st.session_state["messages"].append([{"role": "assistant", "content": message_response}])
         show_messages(text)
 
 if st.button("Reset Conversation"):
