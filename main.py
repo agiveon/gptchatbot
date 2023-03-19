@@ -45,7 +45,6 @@ st.header("STEP 1: Name & DOB")
 if "horoscope" not in st.session_state:
     st.session_state["horoscope"] = ''
 
-
 with st.form("name_dob", clear_on_submit=True):
         user_name = st.text_input("What is your name?")
         user_dob = st.date_input('What is your dob?')
@@ -55,6 +54,7 @@ if name_dob_submit:
     zodiac_sign = get_zodiac_sign(user_dob)
     st.session_state["horoscope"] = get_horoscope_content(day='today', week = 'current', month = 'current', sign=zodiac_sign)
     st.write(f'✅ Hi {user_name}, got your horoscope - you can proceed to chat.')
+    st.write(st.session_state["horoscope"])
 
 BASE_PROMPT = [{"role": "system", "content": f"My name is {user_name}. You are my astrologer named Jane. Answer questions regarding my horoscope: {st.session_state['horoscope']}"}]
 
