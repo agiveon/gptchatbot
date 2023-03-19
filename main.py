@@ -59,7 +59,7 @@ if name_dob_submit:
     st.session_state["horoscope"] = get_horoscope_content(day='today', week = 'current', month = 'current', sign=zodiac_sign)
     st.write(f'✅ Hi {user_name}, got your horoscope - you can proceed to chat.')
     # st.write(st.session_state["horoscope"])
-    BASE_PROMPT = [{"role": "system", "content": f"My name is {user_name}. You are my astrologer named Jane. Answer questions regarding my horoscope."}]
+    BASE_PROMPT = [{"role": "system", "content": f"My name is {user_name} and I was born on {str(user_dob)}. You are my astrologer named Jane. Answer questions regarding my horoscope."}]
     BASE_PROMPT += [{"role": "user", "content": f"My horoscope: {st.session_state['horoscope']}"}]
     BASE_PROMPT += [{"role": "user", "content": f"Answer my questions strictly based only on this given horoscope in the voice of my astrologer."}]
     st.session_state["messages"] = BASE_PROMPT
