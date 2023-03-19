@@ -91,8 +91,9 @@ if st.button("Reset Conversation"):
     st.session_state["messages"] = BASE_PROMPT
     show_messages(text)
 
-st.subheader('History')
-st.write(st.session_state["messages"])
+if name_dob_submit:
+    st.subheader('History')
+    st.write(st.session_state["messages"])
 
 
 
