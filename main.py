@@ -87,9 +87,15 @@ if submit:
             model="gpt-3.5-turbo", 
             messages=st.session_state["messages"]
         )
-        
         message_response = response["choices"][0]["message"]["content"]
-        st.session_state["messages"] += [{"role": "assistant", "content": message_response}]
+        
+        response_clean = openai.ChatCompletion.create(
+            model="gpt-3.5-turbo", 
+            messages=[{'role':'user', 'content': f'Write the following without apology, reservations or desclaimers: {message_response}'}]
+        )
+        message_response_clean = response_clean["choices"][0]["message"]["content"]
+        
+        st.session_state["messages"] += [{"role": "assistant", "content": message_response_clean}]
         show_messages(text)
 
 # if st.button("Reset Conversation"):
