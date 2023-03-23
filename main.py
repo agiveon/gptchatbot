@@ -2,6 +2,7 @@ import openai
 import toml
 import streamlit as st
 from horoscope import get_horoscope_content
+import datetime
 
 def get_zodiac_sign(dob):
     month = dob.month
@@ -54,7 +55,7 @@ if "messages" not in st.session_state:
 
 with st.form("name_dob", clear_on_submit=True):
         user_name = st.text_input("What is your name?")
-        user_dob = st.date_input('What is your dob?')
+        user_dob = st.date_input('What is your dob?',min_value = datetime.date(1950, 1, 1))
         user_loc = st.text_input('Where were you born?')
         name_dob_submit = st.form_submit_button(label="Submit")
 
