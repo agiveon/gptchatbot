@@ -55,6 +55,7 @@ if "messages" not in st.session_state:
 with st.form("name_dob", clear_on_submit=True):
         user_name = st.text_input("What is your name?")
         user_dob = st.date_input('What is your dob?')
+        user_loc = st.text_input('Where were you born?')
         name_dob_submit = st.form_submit_button(label="Submit")
 
 if name_dob_submit:
@@ -62,9 +63,9 @@ if name_dob_submit:
     st.session_state["horoscope"] = get_horoscope_content(day='today', week = 'current', month = 'current', sign=zodiac_sign)
     st.write(f'✅ Hi {user_name}, got your horoscope - you can proceed to chat.')
     # st.write(st.session_state["horoscope"])
-    BASE_PROMPT = [{"role": "system", "content": f"My name is {user_name} and I was born on {str(user_dob)}. You are an astrology chatbot named Jane, created by a group of engineers from Los Angeles. Answer questions regarding my horoscope."}]
+    BASE_PROMPT = [{"role": "system", "content": f"My name is {user_name} and I was born on {str(user_dob)} in {user_loc}. You are an astrology chatbot named Jane, created by a group of engineers from Los Angeles. Answer questions regarding my horoscope."}]
     BASE_PROMPT += [{"role": "user", "content": f"My horoscope: {st.session_state['horoscope']}"}]
-    BASE_PROMPT += [{"role": "system", "content": f"Answer my questions without disclaimers or reservations,  strictly based only on my horoscope in the voice of my astrologer, named Jane and refer to me by my name."}]
+    BASE_PROMPT += [{"role": "system", "content": f"Answer my questions strictly based only on my horoscope in the voice of my astrologer, named Jane and refer to me by my name."}]
     st.session_state["messages"] = BASE_PROMPT
 
 # BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my questions about my horoscope"}]
