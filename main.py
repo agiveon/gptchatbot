@@ -83,7 +83,7 @@ with st.form("myform", clear_on_submit=True):
 
 if submit:
     with st.spinner("Generating response..."):
-        st.session_state["messages"] += [{"role": "user", "content": prompt}]
+        st.session_state["messages"] += [{"role": "user", "content": f'Answer the question: "{prompt}" without apologies, reservations or desclaimers'}]
         
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", 
@@ -91,13 +91,17 @@ if submit:
         )
         message_response = response["choices"][0]["message"]["content"]
         
-        response_clean = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", 
-            messages=[{'role':'user', 'content': f'Write the following without apologies, reservations or desclaimers: {message_response}'}]
-        )
-        message_response_clean = response_clean["choices"][0]["message"]["content"]
+        st.session_state["messages"].pop()
+        st.session_state["messages"] += [{"role": "user", "content": prompt}]
+        st.session_state["messages"] += [{"role": "assistant", "content": message_response}]
+
+        # response_clean = openai.ChatCompletion.create(
+        #     model="gpt-3.5-turbo", 
+        #     messages=[{'role':'user', 'content': f'Write the following without apologies, reservations or desclaimers: {message_response}'}]
+        # )
+        # message_response_clean = response_clean["choices"][0]["message"]["content"]
         
-        st.session_state["messages"] += [{"role": "assistant", "content": message_response_clean}]
+        # st.session_state["messages"] += [{"role": "assistant", "content": message_response}]
         show_messages(text)
 
 # if st.button("Reset Conversation"):
