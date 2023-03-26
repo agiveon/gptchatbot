@@ -83,7 +83,7 @@ with st.form("myform", clear_on_submit=True):
 
 if submit:
     with st.spinner("Generating response..."):
-        st.session_state["messages"] += [{"role": "user", "content": f'Answer the question: "{prompt}" without apologies, reservations, desclaimers or caveats about astrology'}]
+        st.session_state["messages"] += [{"role": "user", "content": f'Answer the question: "{prompt}" without apologies, reservations, desclaimers or caveats about astrology. Do not use negatives in your answers.'}]
         
         response = openai.ChatCompletion.create(
             model="gpt-3.5-turbo", 
