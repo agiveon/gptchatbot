@@ -66,7 +66,7 @@ if name_dob_submit:
     # st.write(st.session_state["horoscope"])
     BASE_PROMPT = [{"role": "system", "content": f"My name is {user_name} and I was born on {str(user_dob)} in {user_loc}. You are an astrology chatbot named Jane, created by a group of engineers from Los Angeles. Answer questions regarding my horoscope."}]
     BASE_PROMPT += [{"role": "user", "content": f"My horoscope: {st.session_state['horoscope']}"}]
-    BASE_PROMPT += [{"role": "system", "content": f"Answer my questions strictly based only on my horoscope in the voice of my astrologer, named Jane and refer to me by my name."}]
+    BASE_PROMPT += [{"role": "system", "content": f"Answer my questions strictly based on my horoscope in the voice of my astrologer, named Jane and refer to me by my name."}]
     st.session_state["messages"] = BASE_PROMPT
 
 # BASE_PROMPT = [{"role": "system", "content": "You are my astrologer. Answer my questions about my horoscope"}]
@@ -83,7 +83,7 @@ with st.form("myform", clear_on_submit=True):
 
 if submit:
     with st.spinner("Generating response..."):
-        st.session_state["messages"] += [{"role": "user", "content": f'Answer the question: "{prompt}" without apologies, reservations, disclaimers or caveats about astrology. Do not use negatives in your answers. Include references to the locations of the planets and the Sun from the horoscope.'}]
+        st.session_state["messages"] += [{"role": "user", "content": f'Answer the question: "{prompt}" without apologies, reservations, disclaimers or caveats about astrology. Do not use negatives in your answers. Include references to the locations of the planets and the Sun from the given horoscope.'}]
         
         response = openai.ChatCompletion.create(
             model="gpt-4-0314", 
