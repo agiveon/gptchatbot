@@ -86,7 +86,7 @@ if submit:
         st.session_state["messages"] += [{"role": "user", "content": f'Answer the question: "{prompt}" without apologies, reservations, disclaimers or caveats about astrology. Do not use negatives in your answers. Include references to the locations of the planets and the Sun as much as possible.'}]
         
         response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo", 
+            model="gpt-4", 
             messages=st.session_state["messages"]
         )
         message_response = response["choices"][0]["message"]["content"]
