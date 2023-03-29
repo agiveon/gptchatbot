@@ -83,7 +83,7 @@ with st.form("myform", clear_on_submit=True):
 
 if submit:
     with st.spinner("Generating response..."):
-        st.session_state["messages"] += [{"role": "user", "content": f'Answer the question: "{prompt}" without apologies, reservations, disclaimers or caveats about astrology. Do not use negatives in your answers. Include references to the locations of the planets and the Sun as much as possible.'}]
+        st.session_state["messages"] += [{"role": "user", "content": f'Answer the question: "{prompt}" without apologies, reservations, disclaimers or caveats about astrology. Do not use negatives in your answers. Include references to the locations of the planets and the Sun from the horoscope.'}]
         
         response = openai.ChatCompletion.create(
             model="gpt-4", 
